@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contentmanagement-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ContentManagement
+  template:
+    metadata:
+      labels:
+        app:  ContentManagement
+    spec:
+      containers:
+        - name: contentmanagement
+          image: cyrinls/contentmanagement
+        - name: mongodb
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
+      volumes:
+        - name: mongo-data
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: contentmanagement-clusterip-srv
+spec:
+  selector:
+    app:  ContentManagement
+  ports:
+    - name: contentmanagement
+      protocol: TCP
+      port: 4000
+      targetPort: 4000

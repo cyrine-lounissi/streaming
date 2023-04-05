@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: videostreaming-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: videostreaming
+  template:
+    metadata:
+      labels:
+        app: videostreaming
+    spec:
+      containers:
+        - name: videostreaming
+          image: cyrinls/videostreaming
+        - name: mongodb
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
+      volumes:
+        - name: mongo-data
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: videostreaming-clusterip-srv
+spec:
+  selector:
+    app: videostreaming
+  ports:
+    - name: videostreaming
+      protocol: TCP
+      port: 4001
+      targetPort: 4001
