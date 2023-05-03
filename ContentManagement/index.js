@@ -309,6 +309,6 @@ app.use('/content/video/:videoName(*)', (req, res) => {
   });
 });
 app.listen(port, () => {
-  console.log('Starting now');
+  console.log('Starting  hope');
   console.log(`Server listening on port 4000`);
 });
