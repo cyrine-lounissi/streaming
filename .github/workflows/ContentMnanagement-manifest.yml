@@ -19,7 +19,7 @@ jobs:
         run: |
           cd ContentManagement
           docker build -t cyrinls/contentmanagement .
-          docker login -u $DOCKER_USERNAME -P $DOCKER_PASSWORD
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
           DOCKER_PASSWORD:  ${{secrets.DOCKER_PASSWORD}}
