@@ -36,7 +36,7 @@ try {
   });
 } catch (error) {
 
-  console.error('Error connecting to RabbitMQ server:', error.message);
+  console.error('Error connecting to RabbitMQ-server:', error.message);
 }
  
 }

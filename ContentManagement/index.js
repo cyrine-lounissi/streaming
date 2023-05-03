@@ -14,7 +14,7 @@ const {consumeVideoPlayedMessage}= require('./Event/player-consumer')
 const {emitNewContentEvent}=require('./Event/event-handler');
 const{sendMessageDeleted}=require('./Event/content-delete');
 const{consumeWatchTimeMessage}=require('./Event/watchTime-consumer');
-const registerService = require('./consulRegister');
+//const registerService = require('./consulRegister') ;
 const path = require('path');
 const port=4000;
 const storage = multer.diskStorage({
@@ -41,7 +41,7 @@ var serviceWatchList = new ServiceWatchList();
 
 serviceContent.connect()
   .then(() => {
-    console.log("ServiceContent connected to MongoDB");
+    console.log("ServiceContent  connected to MongoDB");
   })
   .catch((err) => {
     console.error("Failed to connect to MongoDB:", err);

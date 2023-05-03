@@ -10,7 +10,7 @@ const multer = require('multer');
 const { sendMessage } = require('./Event/event-playing');
 const{sendwatchTime}=require('./Event/event-watchTime')
 const{consumeVideoDeletedMessage}=require('./Event/event-deleting');
-const registerService = require('./consulRegister');
+//const registerService = require('./consulRegister') ;
 const port=4001;
 app.use(bodyParser.json());
 app.use(cors());
@@ -19,7 +19,7 @@ let eventEmitted = false;
 let streamEnded = false; // flag to determine whether stream has ended or not
 const mongoUri =process.env.MONGO_URI
 const client = mongoClient.connect(`mongodb://${mongoUri}`, { useUnifiedTopology: true });
-
+console.log('conntected to mongo db  in video streaming ');
 eventHandler();
 consumeVideoDeletedMessage();
 app.get('/healthcheck', (req, res) => {

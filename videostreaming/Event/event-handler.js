@@ -1,4 +1,7 @@
 const amqp = require('amqplib');
+const axios =require('axios');
+const path =require('path');
+const fs =require('fs');
 const { MongoClient, ObjectId } = require('mongodb');
 const rabbitmqUri = process.env.RABBITMQ_URI
 const mongoUri =process.env.MONGO_URI
@@ -30,33 +33,30 @@ module.exports = async function() {
       const document = { contentId, videoPath };
     
       await collection.insertOne(document);
-      client.close()
-      
+      client.close();
       console.log(`Saved content with ID ${contentId} and video path ${videoPath} to MongoDB!`);
-       /*axios({
+      const videosDir = path.join(__dirname, '..', 'uploads');
+          console.log(videosDir);
+          const videoName = path.basename(videoPath);
+          console.log(videoName);
+          const filePath = path.join(videosDir, videoName);
+          console.log(filePath);
+         axios({
         method: 'get',
-        url: `http://${contentManagement}/content/video/${videoPath}`,
+        url: `http://contentmanagement-clusterip-srv:4000/content/video/${videoPath}`,
         responseType: 'stream'
       })
         .then(response => {
-          // create a write stream to save the video file
-          const videosDir = path.join(__dirname, '..', 'uploads');
-          const videoName = path.basename(videoPath);
-          const filePath = path.join(videosDir, videoName);
-          console.log(filePath);
-          const writeStream = fs.createWriteStream(filePath);
-          
-          // pipe the response data to the write stream
+         const writeStream = fs.createWriteStream(filePath);
           response.data.pipe(writeStream);
-          
-          // listen for completion of writing the file
           writeStream.on('finish', () => {
             console.log('File saved successfully');
           });
         })
         .catch(error => {
           console.error(`Error retrieving file: ${error}`);
-        });*/
+        });
+    
     }, { noAck: true });
     
   } catch (err) {

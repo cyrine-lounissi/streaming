@@ -13,6 +13,7 @@ async function consumeVideoPlayedMessage() {
     console.log(`Waiting for messages in ${queueName} queue...`);
     channel.consume(queueName, async (message) => {
     const content = JSON.parse(message.content.toString());
+    console.log(`Received message: ${JSON.stringify(content)}`);
     const id= content.contentId;
     console.log(id);
     const contentID =parseInt(id);
@@ -29,8 +30,9 @@ async function consumeVideoPlayedMessage() {
       } else {
         await database.collection('content').updateOne({ _id: new ObjectId(id) }, { $set: { views: 1 },  $addToSet: { history: uid } });
       }
-     
-    console.log(`Received message: ${JSON.stringify(content)}`);
+      console.log(`Saved content with ID ${id} and user  ${uid} to MongoDB!`);
+
+    
     
     channel.ack(message);
   });
