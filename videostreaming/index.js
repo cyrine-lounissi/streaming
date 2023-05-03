@@ -129,6 +129,7 @@ app.post('/setQuality', (req, res) => {
 });
 
   app.listen(port, () => {
+    console.log('helllloo');
     console.log(`Server listening on port 4001`);
   });
   

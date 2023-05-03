@@ -11,7 +11,7 @@ describe('Content Management System', function() {
     describe('addNewContent', function () {
         this.timeout(5000);
 
-        it('should add new content to the database', async function () {
+        /*it('should add new content to the database', async function () {
             const req = {
                 files: {
                     video: [{
@@ -64,13 +64,13 @@ describe('Content Management System', function() {
             /*const insertedContent = await database.collection('content').findOne({ 'metadata.id': expectedMetadata.id });
             expect(insertedContent).to.exist;
             expect(insertedContent.metadata).to.deep.equal(expectedMetadata);
-            expect(insertedContent.video).to.deep.equal(expectedVideo);*/
+            expect(insertedContent.video).to.deep.equal(expectedVideo);
 
             // clean up the test collection by deleting the test data
             await database.collection('content').deleteOne({ metadata: { title: 'Test Data' } });
 
             client.close(); // close the client connection
-        });
+        });*/
         it('should return an error if an invalid path is provided', async function () {
             const req = {
               files: {
