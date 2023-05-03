@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  IMAGE_NAME: ContentManagement
+  IMAGE_NAME: contentmanagement
 
 jobs:
   build:
@@ -29,7 +29,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: cyrinls/ContentManagement:latest
+          tags: cyrinls/contentmanagement:latest
 
   deploy:
     needs: build
