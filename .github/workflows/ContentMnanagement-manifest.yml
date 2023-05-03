@@ -3,7 +3,7 @@ name: ContentMnanagement-manifest
 on:
   push:
     branches:
-      - main
+      - master
 
       
 
