@@ -16,17 +16,17 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build and pushing Docker image
-        
-      - run:  cd ContentManagement
-      - run:  docker build -t cyrinls/contentmanagement .
-      - run:  docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        run: |
+          cd ContentManagement
+          docker build -t cyrinls/contentmanagement .
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
           DOCKER_PASSWORD:  ${{secrets.DOCKER_PASSWORD}}
-      - run: docker push cyrinls/contentmanagement  
-
- 
+          
+      - name: Push Docker image
+        run: docker push cyrinls/contentmanagement  
 
   deploy:
     needs: build
