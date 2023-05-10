@@ -14,7 +14,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+        
+      - name: Build the Docker image
+        run: cd ContentManagement && npm install && npm run test:ci
       - name: Build and pushing Docker image
         run: |
           cd ContentManagement
